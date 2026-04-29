@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,8 @@
 <style>
 body {
     margin: 0;
-    font-family: -apple-system, Arial;
-    background: linear-gradient(#ffcc00, #ffd633);
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#ffcc00, #ffdb4d);
 }
 
 /* HEADER */
@@ -20,13 +20,48 @@ body {
     padding: 20px;
 }
 
+.header h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.header p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
 /* CARD */
 .card {
     background: white;
     margin: 15px;
-    padding: 16px;
-    border-radius: 14px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* INPUT */
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    background: #d40511;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* INFO */
+.info {
+    margin-top: 10px;
 }
 
 /* PROGRESS */
@@ -34,100 +69,44 @@ body {
     background: #eee;
     border-radius: 20px;
     overflow: hidden;
+    margin-top: 10px;
 }
 
 .progress {
-    height: 22px;
-    width: 0;
-    background: linear-gradient(to right, #00c853, #64dd17);
+    width: 60%;
+    background: #d40511;
     color: white;
     text-align: center;
-    line-height: 22px;
-    font-weight: bold;
-    transition: width 1.5s ease;
-}
-
-/* STATUS BADGE */
-.badge {
-    display: inline-block;
-    background: #00c853;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
+    padding: 5px 0;
 }
 
 /* TIMELINE */
-.timeline {
-    position: relative;
-    margin-top: 20px;
-}
-
-.timeline::before {
-    content: "";
-    position: absolute;
-    left: 20px;
-    width: 4px;
-    height: 100%;
-    background: #ddd;
-}
-
-.timeline::after {
-    content: "";
-    position: absolute;
-    left: 20px;
-    width: 4px;
-    height: 70%;
-    background: #00c853;
-    transition: height 1.5s;
-}
-
 .timeline-item {
-    position: relative;
-    padding-left: 50px;
-    margin-bottom: 15px;
-    cursor: pointer;
-}
-
-.circle {
-    position: absolute;
-    left: 12px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #ccc;
-}
-
-.done { background: #00c853; }
-.active { background: #00e676; box-shadow: 0 0 8px #00e676; }
-
-.timeline-box {
-    background: #f7f7f7;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: #f9f9f9;
     padding: 14px;
     border-radius: 10px;
+    margin-top: 12px;
 }
 
-/* HIDDEN DETAILS */
-.details {
-    display: none;
-    font-size: 12px;
-    color: gray;
-    margin-top: 5px;
+.timeline-icon {
+    font-size: 20px;
+    width: 30px;
 }
 
-/* ROUTE */
-.route {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    font-size: 12px;
+.timeline-content {
+    flex: 1;
 }
 
-.dot {
-    width: 10px;
-    height: 10px;
-    background: #00c853;
-    border-radius: 50%;
+.timeline-time {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.timeline-text {
+    font-size: 15px;
 }
 
 /* FOOTER */
@@ -136,14 +115,27 @@ body {
     background: #d40511;
     color: white;
     padding: 10px;
+    margin-top: 20px;
+    font-size: 14px;
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="header">
-    <h2>Express Tracking</h2>
+    <h1>Express Tracking</h1>
+    <p>Fast. Reliable. Worldwide.</p>
+</div>
+
+<div class="card">
+    <h3>Enter Tracking Number</h3>
+    <input placeholder="Enter code">
+    <button>Track</button>
+    <p style="font-size:12px;color:gray;">
+        Format: DH + numbers + letters
+    </p>
 </div>
 
 <div class="card">
@@ -172,41 +164,46 @@ body {
 <div class="card">
     <h3>Tracking Timeline</h3>
 
-    <div class="timeline">
-
-        <div class="timeline-item" onclick="toggle(this)">
-            <div class="circle done"></div>
-            <div class="timeline-box">
-                📦 08:00 — Picked up
-                <div class="details">Kuala Lumpur Facility</div>
-            </div>
+    <div class="timeline-item">
+        <div class="timeline-icon">📦</div>
+        <div class="timeline-content">
+            <div class="timeline-time">08:00</div>
+            <div class="timeline-text">Shipment collected in Kuala Lumpur</div>
         </div>
-
-        <div class="timeline-item" onclick="toggle(this)">
-            <div class="circle done"></div>
-            <div class="timeline-box">
-                ✈️ 10:30 — Departed Malaysia
-                <div class="details">International Airport</div>
-            </div>
-        </div>
-
-        <div class="timeline-item" onclick="toggle(this)">
-            <div class="circle active"></div>
-            <div class="timeline-box">
-                🌏 14:00 — In transit
-                <div class="details">Flying over Asia</div>
-            </div>
-        </div>
-
-        <div class="timeline-item" onclick="toggle(this)">
-            <div class="circle"></div>
-            <div class="timeline-box">
-                🛃 Pending — Customs
-                <div class="details">Awaiting clearance</div>
-            </div>
-        </div>
-
     </div>
+
+    <div class="timeline-item">
+        <div class="timeline-icon">✈️</div>
+        <div class="timeline-content">
+            <div class="timeline-time">10:30</div>
+            <div class="timeline-text">Departed international facility</div>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-icon">🌏</div>
+        <div class="timeline-content">
+            <div class="timeline-time">14:00</div>
+            <div class="timeline-text">In transit through regional hub</div>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-icon">🛃</div>
+        <div class="timeline-content">
+            <div class="timeline-time">18:10</div>
+            <div class="timeline-text">Arrived at destination country facility</div>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-icon">🚚</div>
+        <div class="timeline-content">
+            <div class="timeline-time">Pending</div>
+            <div class="timeline-text">Out for delivery</div>
+        </div>
+    </div>
+
 </div>
 
 <div class="card">
@@ -216,42 +213,40 @@ body {
     <p>Pieces: 1</p>
 </div>
 
+
 <div class="card">
     <h3>Recent Shipments <span style="font-size:12px;color:#888;">(Sample)</span></h3>
 
-    <p>📦 Singapore → China — Delivered (12 Mar)</p>
-    <p>📦 Germany → China — Delivered (18 Mar)</p>
-    <p>📦 Japan → China — Delivered (22 Mar)</p>
-    <p>📦 South Korea → China — Delivered (27 Mar)</p>
-    <p>📦 UAE → China — Delivered (02 Apr)</p>
+    <div class="timeline-item">
+        <div>📦</div>
+        <div><b>Singapore → China</b><br>Delivered — 12 Mar 2026</div>
+    </div>
+
+    <div class="timeline-item">
+        <div>📦</div>
+        <div><b>Germany → China</b><br>Delivered — 18 Mar 2026</div>
+    </div>
+
+    <div class="timeline-item">
+        <div>📦</div>
+        <div><b>Japan → China</b><br>Delivered — 22 Mar 2026</div>
+    </div>
+
+    <div class="timeline-item">
+        <div>📦</div>
+        <div><b>South Korea → China</b><br>Delivered — 27 Mar 2026</div>
+    </div>
+
+    <div class="timeline-item">
+        <div>📦</div>
+        <div><b>UAE → China</b><br>Delivered — 02 Apr 2026</div>
+    </div>
+
 </div>
 
 <div class="footer">
     © 2026 Tracking Project by Big H
 </div>
-
-<script>
-// progress animation
-setTimeout(() => {
-    let p = document.getElementById("progress");
-    p.style.width = "70%";
-    p.innerText = "70%";
-}, 300);
-
-// live timer
-let seconds = 0;
-setInterval(() => {
-    seconds++;
-    document.getElementById("time").innerText = 
-        "Updated " + seconds + " seconds ago";
-}, 1000);
-
-// toggle details
-function toggle(el) {
-    let d = el.querySelector(".details");
-    d.style.display = d.style.display === "block" ? "none" : "block";
-}
-</script>
 
 </body>
 </html>
